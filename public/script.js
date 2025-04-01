@@ -18,8 +18,8 @@ const states = [
     return interest;
   }
   
-  // Display a bill on the home page
-  function displayBill(bill) {
+  // script.js
+function displayBill(bill) {
     const interest = calculateInterest(bill.amount, bill.interest_rate, 20);
     const totalCost = bill.amount + interest;
     return `
@@ -33,10 +33,43 @@ const states = [
           <option value="">Select your state</option>
           ${states.map(state => `<option value="${state}">${state}</option>`).join('')}
         </select>
+        <input type="email" id="email-${bill.id}" placeholder="Enter your email" required>
         <button class="approve" onclick="vote('approve', ${bill.id}, '${bill.name}')">I Approve</button>
         <button class="disapprove" onclick="vote('disapprove', ${bill.id}, '${bill.name}')">I Do Not Approve</button>
       </div>
     `;
+  }
+  
+  async function vote(voteType, billId, billName) {
+    const state = document.getElementById(`state-${billId}`).value;
+    const email = document.getElementById(`email-${billId}`).value.trim();
+  
+    if (!state) {
+      alert('Please select your state.');
+      return;
+    }
+    if (!email) {
+      alert('Please enter your email.');
+      return;
+    }
+  
+    const response = await fetch('/api/vote', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ billId, state, vote: voteType, email }),
+    });
+  
+    const result = await response.json();
+    if (response.ok) {
+      const notify = confirm('Vote recorded! Would you like to notify your representative about your vote on this bill?');
+      if (notify) {
+        window.location.href = `/representative-finder.html?bill=${encodeURIComponent(billName)}&vote=${voteType}&email=${encodeURIComponent(email)}`;
+      } else {
+        alert('Vote recorded successfully.');
+      }
+    } else {
+      alert(result.error || 'Error recording vote.');
+    }
   }
   
   // Load bills on the home page
@@ -88,35 +121,8 @@ const states = [
     }
   }
   
-  // Submit a vote
-  async function vote(voteType, billId, billName) {
-    const state = document.getElementById(`state-${billId}`).value;
-    if (!state) {
-      alert('Please select your state.');
-      return;
-    }
   
-    // Record the vote in the database
-    const response = await fetch('/api/vote', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ billId, state, vote: voteType }),
-    });
-  
-    if (response.ok) {
-      // Show a popup asking if the user wants to notify their representative
-      const notify = confirm('Vote recorded! Would you like to notify your representative about your vote on this bill?');
-      if (notify) {
-        // Redirect to representative-finder.html with bill name and vote as query parameters
-        window.location.href = `/representative-finder.html?bill=${encodeURIComponent(billName)}&vote=${voteType}`;
-      } else {
-        alert('Vote recorded successfully.');
-      }
-    } else {
-      alert('Error recording vote.');
-    }
-  }
-  
+    
   // Initialize the page based on its content
   document.addEventListener('DOMContentLoaded', () => {
     if (document.getElementById('bills')) {

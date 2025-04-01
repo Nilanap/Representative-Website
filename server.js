@@ -38,9 +38,11 @@ db.serialize(() => {
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       bill_id INTEGER NOT NULL,
       state TEXT NOT NULL,
+      email TEXT NOT NULL,
       vote TEXT NOT NULL,
       timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
-      FOREIGN KEY (bill_id) REFERENCES bills(id)
+      FOREIGN KEY (bill_id) REFERENCES bills(id),
+      UNIQUE(bill_id, email)
     )
   `);
 
@@ -81,28 +83,44 @@ app.get('/api/bills', (req, res) => {
   });
 });
 
-// Submit a vote
+// server.js
 app.post('/api/vote', (req, res) => {
-  const { billId, state, vote } = req.body;
-  if (!billId || !state || !vote) {
-    res.status(400).json({ error: 'Missing required fields' });
-    return;
-  }
-
-  db.run(
-    'INSERT INTO votes (bill_id, state, vote) VALUES (?, ?, ?)',
-    [billId, state, vote],
-    function (err) {
-      if (err) {
-        res.status(500).json({ error: err.message });
-        return;
-      }
-      console.log(`Vote recorded: Bill ${billId}, State: ${state}, Vote: ${vote}`);
-      res.json({ success: true });
+    const { billId, state, vote, email } = req.body;
+    if (!billId || !state || !vote || !email) {
+      res.status(400).json({ error: 'Missing required fields' });
+      return;
     }
-  );
-});
+  
+    // Basic email format validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      res.status(400).json({ error: 'Invalid email format' });
+      return;
+    }
+  
+    // Normalize email to lowercase
+    const normalizedEmail = email.toLowerCase();
+  
+    db.run(
+      'INSERT INTO votes (bill_id, state, email, vote) VALUES (?, ?, ?, ?)',
+      [billId, state, normalizedEmail, vote],
+      function (err) {
+        if (err) {
+          if (err.code === 'SQLITE_CONSTRAINT') {
+            res.status(409).json({ error: 'You have already voted on this bill with this email.' });
+          } else {
+            res.status(500).json({ error: err.message });
+          }
+          return;
+        }
+        console.log(`Vote recorded: Bill ${billId}, State: ${state}, Email: ${normalizedEmail}, Vote: ${vote}`);
+        res.json({ success: true, billId, vote, email: normalizedEmail });
+      }
+    );
+  });
 
+
+    
 // Get vote results
 app.get('/api/results', (req, res) => {
   db.all(`
