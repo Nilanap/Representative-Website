@@ -1,0 +1,14 @@
+[
+  {
+      "id": 1,
+      "name": "McCain Library",
+      "amount": 83000000,
+      "interest_rate": 2
+  },
+  {
+      "id": 2,
+      "name": "Tariff Increase",
+      "amount": 20000000,
+      "interest_rate": 3
+  }
+]

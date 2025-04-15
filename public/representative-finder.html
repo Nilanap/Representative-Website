@@ -3,244 +3,385 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        :root {
-            --primary: #2962ff;
-            --primary-dark: #0039cb;
-            --primary-light: #768fff;
-            --secondary: #f44336;
-            --text: #333;
-            --text-light: #767676;
-            --background: #f5f5f5;
-            --card: #fff;
-            --border: #e0e0e0;
-        }
-
-        * {
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        body {
-            margin: 0;
-            padding: 0;
-            background-color: var(--background);
-            color: var(--text);
-            line-height: 1.6;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        header {
-            background-color: var(--primary);
-            color: white;
-            padding: 20px 0;
-            text-align: center;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        header h1 {
-            margin: 0;
-            font-size: 2rem;
-        }
-
-        .subtitle {
-            font-size: 1.1rem;
-            opacity: 0.9;
-            margin-top: 5px;
-        }
-
-        section {
-            margin-bottom: 30px;
-            background-color: var(--card);
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-            padding: 20px;
-        }
-
-        h2 {
-            color: var(--primary-dark);
-            border-bottom: 1px solid var(--border);
-            padding-bottom: 10px;
-            margin-top: 0;
-        }
-
-        .form-group {
-            margin-bottom: 15px;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: 600;
-        }
-
-        input, textarea {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid var(--border);
-            border-radius: 4px;
-            font-size: 16px;
-        }
-
-        textarea {
-            min-height: 150px;
-            resize: vertical;
-        }
-
-        button {
-            background-color: var(--primary);
-            color: white;
-            border: none;
-            padding: 12px 20px;
-            font-size: 16px;
-            font-weight: 600;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        button:hover {
-            background-color: var(--primary-dark);
-        }
-
-        button:disabled {
-            background-color: var(--text-light);
-            cursor: not-allowed;
-        }
-
-        .representatives-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            margin-top: 20px;
-        }
-
-        .rep-card {
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 15px;
-            width: calc(50% - 10px);
-            background-color: white;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-
-        .rep-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        .rep-card.selected {
-            border-color: var(--primary);
-            background-color: rgba(41, 98, 255, 0.05);
-        }
-
-        .rep-header {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 10px;
-        }
-
-        .rep-photo {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            object-fit: cover;
-            background-color: #e0e0e0;
-        }
-
-        .rep-name {
-            font-weight: 600;
-            font-size: 1.1rem;
-            margin: 0;
-        }
-
-        .rep-party {
-            color: var(--text-light);
-            margin: 0;
-        }
-
-        .rep-office {
-            font-weight: 500;
-            margin: 0;
-        }
-
-        .rep-details {
-            margin-top: 15px;
-            font-size: 0.9rem;
-        }
-
-        .rep-detail {
-            margin: 5px 0;
-        }
-
-        .checkbox-wrapper {
-            display: flex;
-            align-items: center;
-            margin-top: 15px;
-        }
-
-        .checkbox-wrapper input {
-            width: auto;
-            margin-right: 10px;
-        }
-
-        .checkbox-wrapper label {
-            cursor: pointer;
-        }
-
-        .status-message {
-            padding: 15px;
-            border-radius: 4px;
-            margin-bottom: 20px;
-        }
-
-        .error {
-            background-color: #ffebee;
-            color: #c62828;
-            border: 1px solid #ef9a9a;
-        }
-
-        .success {
-            background-color: #e8f5e9;
-            color: #2e7d32;
-            border: 1px solid #a5d6a7;
-        }
-
-        .loading {
-            background-color: #e3f2fd;
-            color: #1565c0;
-            border: 1px solid #90caf9;
-        }
-
-        .hidden {
-            display: none;
-        }
-
-        @media (max-width: 768px) {
-            .rep-card {
-                width: 100%;
-            }
-        }
-    </style>
+    <title>Contact Your Representatives</title>
+ 
 </head>
+<style>
+:root {
+    --primary: #2962ff;
+    --primary-dark: #0039cb;
+    --primary-light: #768fff;
+    --secondary: #f44336;
+    --text: #333;
+    --text-light: #767676;
+    --background: #f5f5f5;
+    --card: #fff;
+    --border: #e0e0e0;
+}
 
+* {
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
 
+body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--background);
+    color: var(--text);
+    line-height: 1.6;
+}
 
-    <title>Find Your Representatives</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
+.container {
+    max-width: 800px; /* Reduced from 1200px for tighter layout, matching index.html */
+    margin: 0 auto;
+    padding: 20px;
+}
+
+header {
+    background-color: var(--primary);
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2rem;
+}
+
+.subtitle {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    margin-top: 5px;
+}
+
+nav a {
+    color: white;
+    margin: 0 1em;
+    text-decoration: none;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+main {
+    padding: 2em;
+}
+
+section {
+    margin-bottom: 30px;
+    background-color: var(--card);
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    padding: 25px; /* Increased to match bill cards */
+    text-align: center; /* Center all text and inline elements */
+}
+
+h2 {
+    color: var(--primary-dark);
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 10px;
+    margin: 0 auto 20px; /* Center and add bottom margin */
+    max-width: 600px; /* Limit width for readability */
+}
+
+p {
+    margin: 0 auto 20px; /* Center and space */
+    max-width: 600px; /* Consistent with h2 */
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+
+input,
+textarea,
+select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+textarea {
+    min-height: 150px;
+    resize: vertical;
+}
+
+select {
+    padding: 0.5em;
+    margin: 0.5em 0;
+}
+
+button,
+a.contact-button {
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    padding: 15px 30px; /* Larger for prominence */
+    font-size: 1.2rem; /* Slightly larger text */
+    font-weight: 600;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    text-decoration: none;
+    display: inline-block;
+    margin: 20px auto; /* Center button */
+}
+
+button:hover,
+a.contact-button:hover {
+    background-color: var(--primary-dark);
+}
+
+button:disabled {
+    background-color: var(--text-light);
+    cursor: not-allowed;
+}
+
+button.approve {
+    background-color: #27ae60;
+}
+
+button.approve:hover {
+    background-color: #219653;
+}
+
+button.disapprove {
+    background-color: #c0392b;
+}
+
+button.disapprove:hover {
+    background-color: #a93226;
+}
+
+.bill {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 25px;
+    background-color: var(--card);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    margin-bottom: 1em;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.bill:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.bill .form-group {
+    margin-bottom: 25px;
+}
+
+.bill .form-group select,
+.bill .form-group input {
+    max-width: 400px;
+}
+
+.bill .button-group {
+    display: flex;
+    gap: 15px;
+    margin-top: 50px;
+}
+
+.representatives-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.rep-card {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 15px;
+    width: calc(50% - 10px);
+    background-color: var(--card);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.rep-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.rep-card.selected {
+    border-color: var(--primary);
+    background-color: rgba(41, 98, 255, 0.05);
+}
+
+.rep-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.rep-photo {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    background-color: #e0e0e0;
+}
+
+.rep-name {
+    font-weight: 600;
+    font-size: 1.1rem;
+    margin: 0;
+}
+
+.rep-party {
+    color: var(--text-light);
+    margin: 0;
+}
+
+.rep-office {
+    font-weight: 500;
+    margin: 0;
+}
+
+.rep-details {
+    margin-top: 15px;
+    font-size: 0.9rem;
+}
+
+.rep-detail {
+    margin: 5px 0;
+}
+
+.checkbox-wrapper {
+    display: flex;
+    align-items: center;
+    margin-top: 15px;
+}
+
+.checkbox-wrapper input {
+    width: auto;
+    margin-right: 10px;
+}
+
+.checkbox-wrapper label {
+    cursor: pointer;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1em;
+}
+
+th,
+td {
+    border: 1px solid var(--border);
+    padding: 0.5em;
+    text-align: left;
+}
+
+th {
+    background-color: var(--primary);
+    color: white;
+}
+
+.status-message {
+    padding: 15px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+}
+
+.error {
+    background-color: #ffebee;
+    color: #c62828;
+    border: 1px solid #ef9a9a;
+}
+
+.success {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+    border: 1px solid #a5d6a7;
+}
+
+.loading {
+    background-color: #e3f2fd;
+    color: #1565c0;
+    border: 1px solid #90caf9;
+}
+
+.hidden {
+    display: none;
+}
+
+pre {
+    background-color: #f9f9f9;
+    padding: 15px;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+    white-space: pre-wrap;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.9rem;
+    max-width: 600px; /* Limit width for centering */
+    margin: 0 auto; /* Center the pre block */
+    text-align: left; /* Keep email text left-aligned for readability */
+}
+
+@media (max-width: 768px) {
+    .bill {
+        width: 100%;
+    }
+
+    .bill .form-group select,
+    .bill .form-group input {
+        max-width: 100%;
+    }
+
+    .bill .button-group {
+        flex-direction: column;
+        gap: 10px;
+        margin-top: 40px;
+    }
+
+    .rep-card {
+        width: 100%;
+    }
+
+    .container {
+        padding: 10px;
+    }
+
+    header h1 {
+        font-size: 1.5rem;
+    }
+
+    button,
+    a.contact-button {
+        width: 100%;
+        padding: 12px;
+    }
+
+    h2,
+    p,
+    pre {
+        max-width: 100%; /* Full width on mobile for readability */
+    }
+}
+</style>
 <body>
     <header>
         <div class="container">
             <h1>Find & Contact Your Representatives</h1>
-            <div class="subtitle">Easily reach out to your elected officials</div>
+            <div class="subtitle">Make your voice heard on government bills</div>
             <nav>
                 <a href="index.html">Home</a>
                 <a href="expenditures.html">Expenditures</a>
@@ -250,378 +391,35 @@
     </header>
 
     <div class="container">
-        <div id="statusMessage" class="status-message hidden"></div>
-
-        <section id="addressSection">
-            <h2>Enter Your Address</h2>
-            <p>Provide your full address to find your federal representatives.</p>
-            
-            <form id="addressForm">
-                <div class="form-group">
-                    <label for="streetAddress">Street Address</label>
-                    <input type="text" id="streetAddress" placeholder="123 Main St" required>
-                </div>
-                <div class="form-group">
-                    <label for="city">City</label>
-                    <input type="text" id="city" placeholder="Anytown" required>
-                </div>
-                <div class="form-group">
-                    <label for="state">State</label>
-                    <input type="text" id="state" placeholder="CA" maxlength="2" required>
-                </div>
-                <div class="form-group">
-                    <label for="zip">ZIP Code</label>
-                    <input type="text" id="zip" placeholder="12345" maxlength="5" pattern="[0-9]{5}" required>
-                </div>
-                <button type="submit" id="findRepsBtn">Find My Representatives</button>
-            </form>
+        <section class="contact-section">
+            <h2>Contact Your Representatives</h2>
+            <a href="https://democracy.io" target="_blank" class="contact-button">Click Here to Contact Representatives</a>
         </section>
 
-        <section id="representativesSection" class="hidden">
-            <h2>Your Representatives</h2>
-            <p>Select the representatives you want to contact:</p>
-            <div id="repsList" class="representatives-list"></div>
-            <button id="contactSelectedBtn" disabled>Contact Selected Representatives</button>
+        <section class="importance">
+            <h2>Why Reaching Out Matters</h2>
+            <p>Your vote on a bill is just the start—contacting your representatives is the most important step to ensure your voice shapes the laws that affect us all. By sharing your stance, like your vote on a bill through our platform, you directly influence decisions in Congress. Representatives rely on input from constituents to understand what matters to you. Make your perspective count!</p>
         </section>
 
-        <section id="messageSection" class="hidden">
-            <h2>Compose Your Message</h2>
-            <p>Write your message to send to the selected representatives:</p>
-            
-            <form id="messageForm">
-                <div class="form-group">
-                    <label for="senderName">Your Name</label>
-                    <input type="text" id="senderName" required>
-                </div>
-                <div class="form-group">
-                    <label for="senderEmail">Your Email</label>
-                    <input type="email" id="senderEmail" required>
-                </div>
-                <div class="form-group">
-                    <label for="subject">Subject</label>
-                    <input type="text" id="subject" value="My Vote on a Government Expenditure" required>
-                </div>
-                <div class="form-group">
-                    <label for="messageBody">Message</label>
-                    <textarea id="messageBody" required></textarea>
-                </div>
-                <button type="submit" id="sendMessageBtn">Send Message</button>
-            </form>
-        </section>
+        <section class="example-email">
+            <h2>Example Email to Send</h2>
+            <p>Here’s a sample email you can use or adapt when contacting your representative through Democracy.io:</p>
+            <pre>
+To: Representative Jon Ossoff
+Subject: Opposition to the McCain Library Bill
 
-        <section id="confirmationSection" class="hidden">
-            <h2>Message Sent!</h2>
-            <p>Your message has been sent to your selected representatives.</p>
-            <button id="startOverBtn">Start Over</button>
+Dear Representative Ossoff,
+
+As a resident of Georgia, I am writing to express my disapproval of the proposed McCain Library bill. While I respect the intent to honor a public figure, I am concerned that this project will contribute to our national debt, which already burdens future generations. I believe we should prioritize fiscal responsibility and focus on initiatives that directly address urgent needs in our state, like infrastructure or education.
+
+My name is Jane Doe, a small business owner and parent in Atlanta. I’ve lived in Georgia my entire life and care deeply about our community’s future. I urge you to vote against this bill and consider alternatives that align with our state’s long-term financial health.
+
+Thank you for your time and service.
+
+Sincerely,
+Jane Doe
+            </pre>
         </section>
     </div>
-
-    <script>
-        // Configuration
-        const API_KEY = 'AIzaSyBtaeNyaTigsCKDtqOtSIGg5DLjlgQnn08'; 
-        
-        // DOM Elements
-        const addressForm = document.getElementById('addressForm');
-        const repsList = document.getElementById('repsList');
-        const contactSelectedBtn = document.getElementById('contactSelectedBtn');
-        const messageForm = document.getElementById('messageForm');
-        const startOverBtn = document.getElementById('startOverBtn');
-        
-        // Sections
-        const addressSection = document.getElementById('addressSection');
-        const representativesSection = document.getElementById('representativesSection');
-        const messageSection = document.getElementById('messageSection');
-        const confirmationSection = document.getElementById('confirmationSection');
-        const statusMessage = document.getElementById('statusMessage');
-        
-        // Global Variables
-        let representatives = [];
-        let selectedReps = [];
-        
-        // Get bill and vote from query parameters
-        const urlParams = new URLSearchParams(window.location.search);
-        const billName = urlParams.get('bill') || 'Unknown Bill';
-        const vote = urlParams.get('vote') || 'unknown';
-        const voteText = vote === 'approve' ? 'yes' : vote === 'disapprove' ? 'no' : 'unknown';
-        const voteMessage = `I vote ${voteText} for ${billName}.`;
-        
-        // Event Listeners
-        addressForm.addEventListener('submit', handleAddressFormSubmit);
-        contactSelectedBtn.addEventListener('click', showMessageForm);
-        messageForm.addEventListener('submit', handleMessageSubmit);
-        startOverBtn.addEventListener('click', resetApplication);
-        
-        function handleAddressFormSubmit(event) {
-            event.preventDefault();
-            
-            const street = document.getElementById('streetAddress').value.trim();
-            const city = document.getElementById('city').value.trim();
-            const state = document.getElementById('state').value.trim().toUpperCase();
-            const zip = document.getElementById('zip').value.trim();
-            
-            if (!street || !city || !state || !/^\d{5}$/.test(zip) || !/^[A-Z]{2}$/.test(state)) {
-                showStatus('Please provide a valid full address with a 5-digit ZIP code and 2-letter state code.', 'error');
-                return;
-            }
-            
-            const address = `${street}, ${city}, ${state} ${zip}`;
-            fetchRepresentatives(address);
-        }
-        
-        function fetchRepresentatives(address) {
-            showStatus('Looking up your representatives...', 'loading');
-            
-            const url = `https://www.googleapis.com/civicinfo/v2/representatives?key=${API_KEY}&address=${encodeURIComponent(address)}&levels=country&roles=legislatorUpperBody&roles=legislatorLowerBody`;
-            
-            fetch(url)
-                .then(response => {
-                    if (!response.ok) throw new Error('Unable to find representatives for this address');
-                    return response.json();
-                })
-                .then(data => {
-                    processRepresentativesData(data);
-                    if (representatives.length === 0) {
-                        showStatus('No federal representatives found for this address.', 'error');
-                    } else {
-                        showSection(representativesSection);
-                        hideStatus();
-                    }
-                })
-                .catch(error => {
-                    showStatus(error.message, 'error');
-                    console.error('Error:', error);
-                });
-        }
-        
-        function processRepresentativesData(data) {
-            representatives = [];
-            repsList.innerHTML = '';
-            
-            if (!data.offices || !data.officials) {
-                return;
-            }
-            
-            data.offices.forEach(office => {
-                office.officialIndices.forEach(index => {
-                    const official = data.officials[index];
-                    representatives.push({
-                        name: official.name,
-                        office: office.name,
-                        party: official.party || 'Unknown',
-                        emails: official.emails || [],
-                        photoUrl: official.photoUrl || '',
-                        phones: official.phones || [],
-                        urls: official.urls || [],
-                        address: official.address ? formatAddress(official.address[0]) : 'Address not available'
-                    });
-                });
-            });
-            
-            displayRepresentatives();
-        }
-        
-        function formatAddress(address) {
-            const parts = [];
-            if (address.line1) parts.push(address.line1);
-            if (address.line2) parts.push(address.line2);
-            if (address.line3) parts.push(address.line3);
-            parts.push(`${address.city}, ${address.state} ${address.zip}`);
-            return parts.join(', ');
-        }
-
-        function displayRepresentatives() {
-            repsList.innerHTML = ''; // Clear previous content
-            
-            if (representatives.length === 0) {
-                repsList.innerHTML = '<p>No federal representatives found for this address.</p>';
-                return;
-            }
-            
-            representatives.forEach((rep, index) => {
-                const repCard = document.createElement('div');
-                repCard.className = 'rep-card';
-                repCard.dataset.index = index;
-                
-                const checkboxId = `select-rep-${index}`;
-                
-                // Determine if we need to show a warning (no email, but has phone)
-                let warningMessage = '';
-                if (!rep.emails.length && rep.phones.length) {
-                    warningMessage = `<p class="rep-detail warning" style="color: #f44336; font-style: italic;">Unable to email. You can call the office at ${rep.phones[0]}.</p>`;
-                }
-                
-                repCard.innerHTML = `
-                    <div class="rep-header">
-                        <img src="${rep.photoUrl || '/api/placeholder/60/60'}" alt="${rep.name}" class="rep-photo">
-                        <div>
-                            <h3 class="rep-name">${rep.name}</h3>
-                            <p class="rep-party">${rep.party}</p>
-                            <p class="rep-office">${rep.office}</p>
-                        </div>
-                    </div>
-                    <div class="rep-details">
-                        ${rep.emails.length ? `<p class="rep-detail"><strong>Email:</strong> ${rep.emails[0]}</p>` : '<p class="rep-detail">No email available</p>'}
-                        ${rep.phones.length ? `<p class="rep-detail"><strong>Phone:</strong> ${rep.phones[0]}</p>` : ''}
-                        ${rep.urls.length ? `<p class="rep-detail"><strong>Website:</strong> <a href="${rep.urls[0]}" target="_blank">${rep.urls[0]}</a></p>` : ''}
-                        <p class="rep-detail"><strong>Address:</strong> ${rep.address}</p>
-                        ${warningMessage}
-                    </div>
-                    <div class="checkbox-wrapper">
-                        <input type="checkbox" id="${checkboxId}" class="rep-checkbox">
-                        <label for="${checkboxId}" class="select-label">Select for contact</label>
-                    </div>
-                `;
-                
-                repsList.appendChild(repCard);
-            });
-            
-            // Add event listeners after all DOM elements are created
-            representatives.forEach((rep, index) => {
-                const checkboxId = `select-rep-${index}`;
-                const checkbox = document.getElementById(checkboxId);
-                const repCard = repsList.querySelector(`[data-index="${index}"]`);
-                
-                // Always allow selection, even if no email
-                checkbox.addEventListener('change', function() {
-                    const isChecked = this.checked;
-                    toggleRepresentativeSelection(index, isChecked);
-                    repCard.classList.toggle('selected', isChecked);
-                    contactSelectedBtn.disabled = selectedReps.length === 0;
-                });
-                
-                // Optional: Make the card clickable (except links)
-                repCard.addEventListener('click', function(e) {
-                    if (e.target.tagName === 'A' || 
-                        e.target.tagName === 'INPUT' || 
-                        e.target.tagName === 'LABEL') {
-                        return;
-                    }
-                    
-                    checkbox.checked = !checkbox.checked;
-                    checkbox.dispatchEvent(new Event('change'));
-                });
-            });
-        }
-
-        function toggleRepresentativeSelection(index, isSelected) {
-            // Ensure selectedReps is initialized
-            if (!selectedReps) {
-                selectedReps = [];
-            }
-            
-            if (isSelected) {
-                // Add to selected reps if not already included
-                if (!selectedReps.includes(index)) {
-                    selectedReps.push(index);
-                }
-            } else {
-                // Remove from selected reps
-                const pos = selectedReps.indexOf(index);
-                if (pos !== -1) {
-                    selectedReps.splice(pos, 1);
-                }
-            }
-            
-            // Debug output
-            console.log('Selected representatives:', selectedReps.map(i => representatives[i].name));
-            
-            // Update button state
-            contactSelectedBtn.disabled = selectedReps.length === 0;
-        }
-
-        function handleMessageSubmit(event) {
-            event.preventDefault();
-            
-            const senderName = document.getElementById('senderName').value;
-            const senderEmail = document.getElementById('senderEmail').value;
-            const subject = document.getElementById('subject').value;
-            const messageBody = document.getElementById('messageBody').value;
-            
-            showStatus('Preparing your message...', 'loading');
-            
-            // Separate representatives into those with emails and those without
-            const repsWithEmail = [];
-            const repsWithoutEmailButWithPhone = [];
-            
-            selectedReps.forEach(index => {
-                const rep = representatives[index];
-                if (rep.emails.length) {
-                    repsWithEmail.push({ index, email: rep.emails[0] });
-                } else if (rep.phones.length) {
-                    repsWithoutEmailButWithPhone.push({ name: rep.name, phone: rep.phones[0] });
-                }
-            });
-            
-            // Handle representatives with emails
-            if (repsWithEmail.length > 0) {
-                const recipients = repsWithEmail.map(rep => rep.email);
-                // Combine the vote message with the user's additional message
-                const fullMessage = `${voteMessage}\n\n${messageBody}`;
-                const mailtoLink = `mailto:${recipients.join(',')}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(`From: ${senderName} <${senderEmail}>\n\n${fullMessage}`)}`;
-                
-                try {
-                    window.location.href = mailtoLink;
-                } catch (error) {
-                    showStatus('Error preparing email message: ' + error.message, 'error');
-                    return;
-                }
-            }
-            
-            // Prepare confirmation message
-            let confirmationMessage = 'Your message has been sent to your selected representatives.';
-            if (repsWithEmail.length === 0 && repsWithoutEmailButWithPhone.length === 0) {
-                showStatus('No valid contact methods found for selected representatives.', 'error');
-                return;
-            }
-            
-            if (repsWithoutEmailButWithPhone.length > 0) {
-                const phoneContacts = repsWithoutEmailButWithPhone.map(rep => `${rep.name} (Call: ${rep.phone})`).join(', ');
-                confirmationMessage += `<br><br><strong>Note:</strong> The following representatives could not be emailed but can be contacted by phone: ${phoneContacts}.`;
-            }
-            
-            // Show confirmation section with the updated message
-            setTimeout(() => {
-                hideStatus();
-                showSection(confirmationSection);
-                const confirmationP = confirmationSection.querySelector('p');
-                confirmationP.innerHTML = confirmationMessage;
-            }, 1000);
-        }
-        
-        function showMessageForm() {
-            if (selectedReps.length === 0) {
-                showStatus('Please select at least one representative with an email.', 'error');
-                return;
-            }
-            showSection(messageSection);
-        }
-        
-        function resetApplication() {
-            addressForm.reset();
-            messageForm.reset();
-            representatives = [];
-            selectedReps = [];
-            repsList.innerHTML = '';
-            contactSelectedBtn.disabled = true;
-            showSection(addressSection);
-        }
-        
-        function showSection(sectionToShow) {
-            [addressSection, representativesSection, messageSection, confirmationSection]
-                .forEach(section => section.classList.add('hidden'));
-            sectionToShow.classList.remove('hidden');
-            sectionToShow.scrollIntoView({ behavior: 'smooth' });
-        }
-        
-        function showStatus(message, type = 'info') {
-            statusMessage.textContent = message;
-            statusMessage.className = `status-message ${type}`;
-            statusMessage.classList.remove('hidden');
-        }
-        
-        function hideStatus() {
-            statusMessage.classList.add('hidden');
-        }
-    </script>
 </body>
 </html>
