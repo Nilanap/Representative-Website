@@ -10,5 +10,13 @@
       "name": "Tariff Increase",
       "amount": 20000000,
       "interest_rate": 3
+  },
+
+  {
+    "id": 3,
+    "name": "Highway Expansion in SouthEast",
+    "amount": 330000000,
+    "interest_rate": 5
   }
+  
 ]

@@ -43,7 +43,6 @@ function displayBill(bill) {
       </div>
   `;
 }
-
 async function vote(voteType, billId, billName) {
   const state = document.getElementById(`state-${billId}`).value;
   const email = document.getElementById(`email-${billId}`).value.trim();
@@ -98,30 +97,82 @@ async function loadBills() {
       const bills = await response.json();
       const billContainer = document.getElementById('bills');
       if (billContainer) {
-          billContainer.innerHTML = bills.length ? bills.map(displayBill).join('') : '<p>No bills available.</p>';
+          billContainer.innerHTML = bills.length ? bills.map(displayBill).join('') : '<p class="no-data">No bills available.</p>';
       }
   } catch (err) {
       console.error('Error loading bills:', err);
       const billContainer = document.getElementById('bills');
       if (billContainer) {
-          billContainer.innerHTML = '<p>Error loading bills. Please try again later.</p>';
+          billContainer.innerHTML = '<p class="error">Error loading bills. Please try again later.</p>';
       }
   }
 }
 
-// Optional: Reload bills dynamically (for testing)
-async function reloadBills() {
+async function loadExpenditures() {
   try {
-      const response = await fetch('/api/reload-bills', { method: 'POST' });
-      const result = await response.json();
-      if (response.ok) {
-          console.log(result.message);
-          await loadBills(); // Refresh the bill display
-      } else {
-          console.error('Error reloading bills:', result.error);
+      const response = await fetch('/api/bills');
+      if (!response.ok) {
+          throw new Error('Failed to fetch expenditures');
+      }
+      const bills = await response.json();
+      const tableBody = document.getElementById('expenditures-table');
+      if (tableBody) {
+          if (bills.length === 0) {
+              tableBody.innerHTML = '<tr><td colspan="5" class="no-data">No expenditures available.</td></tr>';
+              return;
+          }
+          tableBody.innerHTML = bills.map(bill => {
+              const interestRate = bill.interest_rate ?? bill.interestRate ?? 0;
+              const interest = calculateInterest(bill.amount, interestRate, 20);
+              const totalCost = bill.amount + interest;
+              return `
+                  <tr>
+                      <td>${bill.name}</td>
+                      <td>$${bill.amount.toLocaleString()}</td>
+                      <td>${interestRate}%</td>
+                      <td>$${interest.toLocaleString()}</td>
+                      <td>$${totalCost.toLocaleString()}</td>
+                  </tr>
+              `;
+          }).join('');
       }
   } catch (err) {
-      console.error('Network error reloading bills:', err);
+      console.error('Error loading expenditures:', err);
+      const tableBody = document.getElementById('expenditures-table');
+      if (tableBody) {
+          tableBody.innerHTML = '<tr><td colspan="5" class="error">Error loading expenditures. Please try again later.</td></tr>';
+      }
+  }
+}
+
+async function loadResults() {
+  try {
+      const response = await fetch('/api/results');
+      if (!response.ok) {
+          throw new Error('Failed to fetch results');
+      }
+      const results = await response.json();
+      const tableBody = document.getElementById('results-table');
+      if (tableBody) {
+          if (results.length === 0) {
+              tableBody.innerHTML = '<tr><td colspan="4" class="no-data">No vote results available.</td></tr>';
+              return;
+          }
+          tableBody.innerHTML = results.map(result => `
+              <tr>
+                  <td>${result.name}</td>
+                  <td>${result.state}</td>
+                  <td>${result.approvals || 0}</td>
+                  <td>${result.disapprovals || 0}</td>
+              </tr>
+          `).join('');
+      }
+  } catch (err) {
+      console.error('Error loading results:', err);
+      const tableBody = document.getElementById('results-table');
+      if (tableBody) {
+          tableBody.innerHTML = '<tr><td colspan="4" class="error">Error loading results. Please try again later.</td></tr>';
+      }
   }
 }
 

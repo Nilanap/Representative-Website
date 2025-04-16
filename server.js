@@ -94,13 +94,13 @@ loadBillsFromJson();
 
 // Get all bills
 app.get('/api/bills', (req, res) => {
-    db.all('SELECT * FROM bills', [], (err, rows) => {
-        if (err) {
-            res.status(500).json({ error: err.message });
-            return;
-        }
-        res.json(rows);
-    });
+  db.all('SELECT * FROM bills', [], (err, rows) => {
+      if (err) {
+          res.status(500).json({ error: err.message });
+          return;
+      }
+      res.json(rows);
+  });
 });
 
 // Record a vote

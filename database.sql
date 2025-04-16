@@ -17,3 +17,11 @@ CREATE TABLE bills (
   FOREIGN KEY (bill_id) REFERENCES bills(id),
   UNIQUE(bill_id, email)
 );
+
+CREATE TABLE IF NOT EXISTS subscribers (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    email TEXT NOT NULL,
+    timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE(email)
+);
+

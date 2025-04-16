@@ -3,11 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Your Representatives</title>
- 
+    <title>Understanding the National Debt</title>
 </head>
 <style>
-:root {
+    :root {
     --primary: #2962ff;
     --primary-dark: #0039cb;
     --primary-light: #768fff;
@@ -33,7 +32,7 @@ body {
 }
 
 .container {
-    max-width: 800px; /* Reduced from 1200px for tighter layout, matching index.html */
+    max-width: 800px;
     margin: 0 auto;
     padding: 20px;
 }
@@ -76,29 +75,21 @@ section {
     background-color: var(--card);
     border-radius: 8px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-    padding: 25px; /* Increased to match bill cards */
-    text-align: center; /* Center all text and inline elements */
+    padding: 25px;
+    text-align: center;
 }
 
 h2 {
-    color: var(--primary-dark );
+    color: var(--primary-dark);
     border-bottom: 1px solid var(--border);
     padding-bottom: 10px;
-    margin: 0 auto 20px; /* Center and add bottom margin */
-    max-width: 600px; /* Limit width for readability */
-}
-
-h3 {
-    color: var(--card );
-    border-bottom: 1px solid var(--border);
-    padding-bottom: 10px;
-    margin: 0 auto 20px; /* Center and add bottom margin */
-    max-width: 600px; /* Limit width for readability */
+    margin: 0 auto 20px;
+    max-width: 600px;
 }
 
 p {
-    margin: 0 auto 20px; /* Center and space */
-    max-width: 600px; /* Consistent with h2 */
+    margin: 0 auto 20px;
+    max-width: 600px;
 }
 
 .form-group {
@@ -132,23 +123,25 @@ select {
 }
 
 button,
-a.contact-button {
+a.contact-button,
+a.action-button {
     background-color: var(--primary);
     color: white;
     border: none;
-    padding: 15px 30px; /* Larger for prominence */
-    font-size: 1.2rem; /* Slightly larger text */
+    padding: 15px 30px;
+    font-size: 1.2rem;
     font-weight: 600;
     border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.3s;
     text-decoration: none;
     display: inline-block;
-    margin: 20px auto; /* Center button */
+    margin: 20px auto;
 }
 
 button:hover,
-a.contact-button:hover {
+a.contact-button:hover,
+a.action-button:hover {
     background-color: var(--primary-dark);
 }
 
@@ -203,6 +196,39 @@ button.disapprove:hover {
     margin-top: 50px;
 }
 
+/* New styles for national-debt.html */
+.debt-facts,
+.resource-links,
+.action-list {
+    list-style: none;
+    padding: 0;
+    margin: 20px auto;
+    max-width: 600px;
+    text-align: left;
+}
+
+.debt-facts li,
+.action-list li {
+    margin-bottom: 15px;
+    font-size: 1rem;
+}
+
+.resource-links li {
+    margin-bottom: 10px;
+}
+
+.resource-links a {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.resource-links a:hover {
+    text-decoration: underline;
+    color: var(--primary-dark);
+}
+
+/* Existing styles for other pages */
 .representatives-list {
     display: flex;
     flex-wrap: wrap;
@@ -339,9 +365,17 @@ pre {
     white-space: pre-wrap;
     font-family: 'Courier New', Courier, monospace;
     font-size: 0.9rem;
-    max-width: 600px; /* Limit width for centering */
-    margin: 0 auto; /* Center the pre block */
-    text-align: left; /* Keep email text left-aligned for readability */
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+h3 {
+    color: var(--card );
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 10px;
+    margin: 0 auto 20px; /* Center and add bottom margin */
+    max-width: 600px; /* Limit width for readability */
 }
 
 @media (max-width: 768px) {
@@ -373,23 +407,28 @@ pre {
     }
 
     button,
-    a.contact-button {
+    a.contact-button,
+    a.action-button {
         width: 100%;
         padding: 12px;
     }
 
     h2,
     p,
-    pre {
-        max-width: 100%; /* Full width on mobile for readability */
+    pre,
+    .debt-facts,
+    .resource-links,
+    .action-list {
+        max-width: 100%;
     }
 }
+
 </style>
 <body>
     <header>
         <div class="container">
-            <h1>Find & Contact Your Representatives</h1>
-            <h3>Make your voice heard on government bills</h3>
+            <h1>Understanding the National Debt</h1>
+            <h3>Why It's So Important To Make Your Voice Heard</h3>
 
             <nav>
                 <a href="index.html">Home</a>
@@ -398,40 +437,60 @@ pre {
                 <a href="national-debt.html">Learn More</a>
                 <a href="representative-finder.html">Contact Representatives</a>
             </nav>
-            
-
         </div>
     </header>
 
     <div class="container">
-        <section class="contact-section">
-            <h2>Contact Your Representatives</h2>
-            <a href="https://democracy.io" target="_blank" class="contact-button">Click Here to Contact Representatives</a>
+        <section class="contact-importance">
+            <h2>Why Contacting Representatives Matters</h2>
+            <p>Contacting your elected officials is one of the most effective ways to influence fiscal policy. The national debt affects every American, and your voice can push for responsible spending and revenue policies. By sharing your concerns about the debt, you encourage lawmakers to prioritize long-term economic stability over short-term fixes.</p>
+            <a href="representative-finder.html" class="contact-button">Contact Your Representative Now</a>
         </section>
 
-        <section class="importance">
-            <h2>Why Reaching Out Matters</h2>
-            <p>Your vote on a bill is just the start—contacting your representatives is the most important step to ensure your voice shapes the laws that affect us all. By sharing your stance, like your vote on a bill through our platform, you directly influence decisions in Congress. Representatives rely on input from constituents to understand what matters to you. Make your perspective count!</p>
+        <section class="debt-explained">
+            <h2>What Is the National Debt?</h2>
+            <p>The national debt is the total amount the U.S. government owes to its creditors, accumulated when spending exceeds revenue, leading to borrowing. It includes:</p>
+            <ul class="debt-facts">
+                <li><strong>Debt Held by the Public</strong>: Money borrowed from individuals, businesses, and foreign entities via Treasury securities.</li>
+                <li><strong>Intragovernmental Debt</strong>: Money the government owes itself, like funds borrowed from Social Security or Medicare trust funds.</li>
+            </ul>
+            <p>The debt grows due to annual budget deficits—when the government spends more than it collects in taxes. Major drivers include healthcare costs, aging populations, defense spending, and interest on existing debt. Historical events, like wars, recessions, and pandemics, have also spiked borrowing.</p>
+            <p>Today, the debt exceeds $36 trillion, or roughly $108,000 per person, and is projected to grow further if spending and revenue imbalances persist.</p>
         </section>
 
-        <section class="example-email">
-            <h2>Example Email to Send</h2>
-            <p>Here’s a sample email you can use or adapt when contacting your representative through Democracy.io:</p>
-            <pre>
-To: Representative Jon Ossoff
-Subject: Opposition to the McCain Library Bill
+        <section class="debt-history">
+            <h2>How Did the Debt Get So High?</h2>
+            <p>The debt has grown over decades due to:</p>
+            <ul class="debt-facts">
+                <li><strong>Structural Imbalances</strong>: Rising costs for programs like Medicare and Social Security outpace tax revenue.</li>
+                <li><strong>Economic Crises</strong>: Responses to the 2008 financial crisis and COVID-19 required massive borrowing.</li>
+                <li><strong>Tax Policies</strong>: Tax cuts without spending reductions increase deficits.</li>
+                <li><strong>Interest Costs</strong>: Borrowing to pay interest compounds the debt.</li>
+            </ul>
+            <p>While debt was manageable post-World War II, recent decades have seen it approach historic highs relative to the economy, limiting flexibility for future crises.</p>
+        </section>
 
-Dear Representative Ossoff,
+        <section class="helpful-links">
+            <h2>Helpful Resources</h2>
+            <p>Explore these resources to learn more or take action:</p>
+            <ul class="resource-links">
+                <li><a href="https://democracy.io" target="_blank">Democracy.io</a>: Contact your representatives easily.</li>
+                <li><a href="https://www.pgpf.org" target="_blank">Peter G. Peterson Foundation</a>: Understand fiscal challenges.</li>
+                <li><a href="https://fiscaldata.treasury.gov" target="_blank">U.S. Treasury Fiscal Data</a>: Track debt in real time.</li>
+                <li><a href="https://www.cbo.gov" target="_blank">Congressional Budget Office</a>: Review debt projections.</li>
+            </ul>
+        </section>
 
-As a resident of Georgia, I am writing to express my disapproval of the proposed McCain Library bill. While I respect the intent to honor a public figure, I am concerned that this project will contribute to our national debt, which already burdens future generations. I believe we should prioritize fiscal responsibility and focus on initiatives that directly address urgent needs in our state, like infrastructure or education.
-
-My name is Jane Doe, a small business owner and parent in Atlanta. I’ve lived in Georgia my entire life and care deeply about our community’s future. I urge you to vote against this bill and consider alternatives that align with our state’s long-term financial health.
-
-Thank you for your time and service.
-
-Sincerely,
-Jane Doe
-            </pre>
+        <section class="ways-to-help">
+            <h2>Ways You Can Help</h2>
+            <p>Every action counts toward a sustainable fiscal future:</p>
+            <ul class="action-list">
+                <li><strong>Contact Lawmakers</strong>: Urge your representatives to support balanced budgets and debt reduction.</li>
+                <li><strong>Vote Informed</strong>: Support candidates who prioritize fiscal responsibility.</li>
+                <li><strong>Raise Awareness</strong>: Share facts about the debt with friends, family, or social media.</li>
+                <li><strong>Engage Locally</strong>: Join community groups or campus initiatives focused on economic policy.</li>
+            </ul>
+            <a href="https://www.itsuptous.org" target="_blank" class="action-button">Join the Movement</a>
         </section>
     </div>
 </body>
